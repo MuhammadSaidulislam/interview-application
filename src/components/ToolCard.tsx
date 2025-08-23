@@ -4,9 +4,9 @@ import Image from 'next/image';
 
 const ToolCard = () => {
     return (
-        <section className="grid gap-6 px-6 sm:grid-cols-2 lg:grid-cols-3 max-w-6xl mx-auto pb-20">
+        <>
             <Card className="bg-white rounded-2xl shadow-md hover:shadow-xl transition">
-                <div className="relative h-48">
+                <div className="relative h-28">
                     <Image
                         src="https://myinterviewpractice.com/images/virtual_interviews.svg" // put your image inside /public/images/
                         alt="Mock Interview"
@@ -41,7 +41,7 @@ const ToolCard = () => {
                     Stay ahead with market trends and role-specific salary insights.
                 </CardContent>
             </Card>
-        </section>
+        </>
     )
 }
 
