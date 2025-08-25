@@ -5,8 +5,8 @@ const Footer = () => {
    <footer className="bg-white text-gray-800 py-12">
       {/* Top links */}
       <div className="flex flex-wrap justify-center gap-6 mb-4 text-sm font-medium">
-        <a href="#" className="hover:text-blue-600 transition">Product</a>
-        <a href="#" className="hover:text-blue-600 transition">About Us</a>
+        <a href="/login" className="hover:text-blue-600 transition">Login</a>
+        <a href="/register" className="hover:text-blue-600 transition">Register</a>
         <a href="#" className="hover:text-blue-600 transition">FAQ</a>
         <a href="#" className="hover:text-blue-600 transition">Contact</a>
         <a href="#" className="hover:text-blue-600 transition">Twitter ↗</a>
