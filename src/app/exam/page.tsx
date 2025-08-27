@@ -7,7 +7,7 @@ import Image from "next/image";
 const examQuestions = [
   {
     id: 1,
-    question: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZ0XKQIuJiu3hKrZIS2p3fSSQ69g9CWIVQWQ&s",
+    question: "../../../assets/question.PNG",
     options: [
       "They are all the same",
       "let and const are block-scoped, var is function-scoped",
@@ -29,7 +29,7 @@ const examQuestions = [
   },
   {
     id: 3,
-    question: "What is the purpose of the 'key' prop in React lists?",
+    question: "../../../assets/question.PNG",
     options: [
       "To style list items",
       "To help React identify which items have changed",
@@ -40,7 +40,7 @@ const examQuestions = [
   },
   {
     id: 4,
-    question: "Which CSS property is used to create flexbox layouts?",
+    question: "../../../assets/question.PNG",
     options: [
       "display: grid",
       "display: flex",
@@ -51,7 +51,7 @@ const examQuestions = [
   },
   {
     id: 5,
-    question: "What does API stand for?",
+    question: "../../../assets/question.PNG",
     options: [
       "Application Programming Interface",
       "Advanced Programming Integration",
@@ -62,7 +62,7 @@ const examQuestions = [
   },
   {
     id: 6,
-    question: "Which HTTP method is used to update existing data?",
+    question: "../../../assets/question.PNG",
     options: [
       "GET",
       "POST",
@@ -73,7 +73,7 @@ const examQuestions = [
   },
   {
     id: 7,
-    question: "What is the time complexity of binary search?",
+    question: "../../../assets/question.PNG",
     options: [
       "O(n)",
       "O(log n)",
@@ -84,7 +84,7 @@ const examQuestions = [
   },
   {
     id: 8,
-    question: "Which database is known as a NoSQL database?",
+    question: "../../../assets/question.PNG",
     options: [
       "MySQL",
       "PostgreSQL",
@@ -95,7 +95,7 @@ const examQuestions = [
   },
   {
     id: 9,
-    question: "What does MVC stand for in software architecture?",
+    question: "../../../assets/question.PNG",
     options: [
       "Model View Controller",
       "Multiple View Components",
@@ -106,7 +106,7 @@ const examQuestions = [
   },
   {
     id: 10,
-    question: "Which of the following is a version control system?",
+    question: "../../../assets/question.PNG",
     options: [
       "npm",
       "Git",
@@ -140,7 +140,7 @@ const page = () => {
     return () => clearInterval(timer);
   }, []);
 
-  const formatTime = (seconds:number) => {
+  const formatTime = (seconds: number) => {
     const minutes = Math.floor(seconds / 60);
     const remainingSeconds = seconds % 60;
     return `${minutes.toString().padStart(2, '0')}:${remainingSeconds.toString().padStart(2, '0')}`;
@@ -155,7 +155,7 @@ const page = () => {
     });
   };
 
-  const handleAnswerSelect = (optionIndex:number) => {
+  const handleAnswerSelect = (optionIndex: number) => {
     setSelectedAnswers({
       ...selectedAnswers,
       [currentQuestion]: optionIndex
@@ -216,12 +216,12 @@ const page = () => {
 
         {/* Question Card */}
         <div className="bg-white rounded-2xl shadow-lg border border-white/50 mb-6">
-           <div className="w-full bg-gray-200 rounded-full h-3 overflow-hidden">
-              <div
-                className="h-full bg-gradient-to-r from-blue-500 to-purple-600 transition-all duration-500 ease-out rounded-full"
-                style={{ width: `${getProgressPercentage()}%` }}
-              ></div>
-            </div>
+          <div className="w-full bg-white rounded-full h-3 overflow-hidden">
+            <div
+              className="h-full bg-gradient-to-r from-blue-500 to-purple-600 transition-all duration-500 ease-out rounded-full"
+              style={{ width: `${getProgressPercentage()}%` }}
+            ></div>
+          </div>
           <div className="mb-6 mt-6 p-8">
             <div className="flex items-center gap-3 mb-4">
               <div className="flex items-center justify-center w-12 h-12 bg-gradient-to-r from-purple-500 to-pink-600 rounded-xl text-white font-bold text-lg">
@@ -229,35 +229,30 @@ const page = () => {
               </div>
               <div>
                 <h2 className="text-xl font-bold text-gray-800">Question {currentQuestion + 1}</h2>
-                <p className="text-gray-600">Choose the correct answer</p>
               </div>
             </div>
 
-            <div className="p-6 bg-gray-50 rounded-xl border-4 border-purple-500">
-              {/* <p className="text-lg font-medium text-gray-800 leading-relaxed">
-                {examQuestions[currentQuestion].question}
-              </p> */}
-              {/* <Image src={examQuestions[currentQuestion].question} width={10} height={10} alt="question" /> */}
-              <img src={examQuestions[currentQuestion].question} width={500} height={500} alt="question" />
-            
+            <div className="p-6 bg-gray-50 rounded-xl border-1 border-purple-500">
+              <img src={examQuestions[currentQuestion].question} width="100%" height={500} alt="question" />
             </div>
           </div>
 
           {/* Options */}
           <div className="space-y-3 p-8">
+            <p className='text-grey-700 font-bold'>Please choose the correct answer:</p>
             {examQuestions[currentQuestion].options.map((option, index) => (
               <button
                 key={index}
                 onClick={() => handleAnswerSelect(index)}
                 className={`w-full p-4 text-left rounded-xl cursor-pointer border-2 transition-all duration-200 hover:shadow-md ${selectedAnswers[currentQuestion] === index
-                    ? 'border-purple-500 bg-purple-50 text-purple-800 shadow-md'
-                    : 'border-gray-200 bg-white text-gray-700 hover:border-purple-300 hover:bg-purple-50/50'
+                  ? 'border-purple-500 bg-purple-50 text-purple-800 shadow-md'
+                  : 'border-gray-200 bg-white text-gray-700 hover:border-purple-300 hover:bg-purple-50/50'
                   }`}
               >
                 <div className="flex items-center gap-3">
                   <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center ${selectedAnswers[currentQuestion] === index
-                      ? 'border-purple-500 bg-purple-500'
-                      : 'border-gray-300'
+                    ? 'border-purple-500 bg-purple-500'
+                    : 'border-gray-300'
                     }`}>
                     {selectedAnswers[currentQuestion] === index && (
                       <div className="w-3 h-3 bg-white rounded-full"></div>
@@ -269,55 +264,55 @@ const page = () => {
               </button>
             ))}
           </div>
-           {/* Navigation */}
-        <div className="bg-white rounded-2xl shadow-lg border border-white/50 p-6">
-          <div className="flex items-center justify-between">
-            <button
-              onClick={handlePrevious}
-              disabled={currentQuestion === 0}
-              className={`flex items-center gap-2 px-6 py-3 rounded-xl font-semibold transition-all duration-200 ${currentQuestion === 0
+          {/* Navigation */}
+          <div className="bg-white rounded-2xl shadow-lg border border-white/50 p-6">
+            <div className="flex items-center justify-between">
+              <button
+                onClick={handlePrevious}
+                disabled={currentQuestion === 0}
+                className={`flex items-center gap-2 px-6 py-3 rounded-xl font-semibold transition-all duration-200 ${currentQuestion === 0
                   ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
-                  : 'bg-gray-200 text-gray-700 hover:bg-gray-300 hover:shadow-md'
-                }`}
-            >
-              <ChevronLeft className="w-5 h-5" />
-              Previous
-            </button>
+                  : 'bg-gray-200 text-gray-700 hover:bg-gray-300 hover:shadow-md cursor-pointer'
+                  }`}
+              >
+                <ChevronLeft className="w-5 h-5" />
+                Previous
+              </button>
 
-            <div className="flex items-center gap-4">
-              <div className="text-center">
-                <p className="text-sm text-gray-600">Answered</p>
-                <p className="text-2xl font-bold text-purple-600">
-                  {Object.keys(selectedAnswers).length}/{examQuestions.length}
-                </p>
+              <div className="flex items-center gap-4">
+                <div className="text-center">
+                  <p className="text-sm text-gray-600">Answered</p>
+                  <p className="text-2xl font-bold text-purple-600">
+                    {Object.keys(selectedAnswers).length}/{examQuestions.length}
+                  </p>
+                </div>
+
+                {currentQuestion === examQuestions.length - 1 && (
+                  <button
+                    onClick={handleSubmitExam}
+                    className="px-6 py-3 bg-gradient-to-r from-green-500 to-emerald-600 text-white font-semibold rounded-xl hover:shadow-lg transition-all duration-200 hover:scale-105"
+                  >
+                    Submit Exam
+                  </button>
+                )}
               </div>
 
-              {currentQuestion === examQuestions.length - 1 && (
-                <button
-                  onClick={handleSubmitExam}
-                  className="px-6 py-3 bg-gradient-to-r from-green-500 to-emerald-600 text-white font-semibold rounded-xl hover:shadow-lg transition-all duration-200 hover:scale-105"
-                >
-                  Submit Exam
-                </button>
-              )}
-            </div>
-
-            <button
-              onClick={handleNext}
-              disabled={currentQuestion === examQuestions.length - 1}
-              className={`flex items-center gap-2 px-6 py-3 rounded-xl font-semibold transition-all duration-200 ${currentQuestion === examQuestions.length - 1
+              <button
+                onClick={handleNext}
+                disabled={currentQuestion === examQuestions.length - 1}
+                className={`flex items-center gap-2 px-6 py-3 cursor-pointer rounded-xl font-semibold transition-all duration-200 ${currentQuestion === examQuestions.length - 1
                   ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
                   : 'bg-gradient-to-r from-blue-500 to-purple-600 text-white hover:shadow-lg hover:scale-105'
-                }`}
-            >
-              Next
-              <ChevronRight className="w-5 h-5" />
-            </button>
+                  }`}
+              >
+                Next
+                <ChevronRight className="w-5 h-5" />
+              </button>
+            </div>
           </div>
         </div>
-        </div>
 
-       
+
       </div>
     </div>
   )
