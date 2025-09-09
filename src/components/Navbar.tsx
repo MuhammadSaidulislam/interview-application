@@ -34,6 +34,9 @@ const Navbar = () => {
             <DropdownMenuItem>
               <Link href="/admin/login">Profile</Link>
             </DropdownMenuItem>
+              <DropdownMenuItem>
+              <Link href="/questions">Questions</Link>
+            </DropdownMenuItem>
             <DropdownMenuItem>
               <Link href="/exam">Exam</Link>
             </DropdownMenuItem>
