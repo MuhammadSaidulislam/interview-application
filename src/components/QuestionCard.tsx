@@ -3,6 +3,7 @@ import { Card, CardContent } from './ui/card'
 import { MessageCircle, Share2, ThumbsUp } from 'lucide-react'
 import { Button } from './ui/button'
 import { Badge } from './ui/badge'
+import Link from 'next/link'
 
 const QuestionCard = () => {
   return (
@@ -12,11 +13,8 @@ const QuestionCard = () => {
           {/* Header */}
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <img
-                src="https://media.licdn.com/dms/image/v2/D5603AQHmP_FoOof1HQ/profile-displayphoto-shrink_100_100/B56ZcsEHbeGQAY-/0/1748790968425?e=1758758400&v=beta&t=dIy5taupoGFgsAGUica25ZfYPquDVvLSUGgnx_Idjbo"
-                alt="User"
-                className="w-10 h-10 rounded-full"
-              />
+              <img   src="https://media.licdn.com/dms/image/v2/D5603AQHmP_FoOof1HQ/profile-displayphoto-shrink_100_100/B56ZcsEHbeGQAY-/0/1748790968425?e=1758758400&v=beta&t=dIy5taupoGFgsAGUica25ZfYPquDVvLSUGgnx_Idjbo"
+                alt="User"  className="w-10 h-10 rounded-full" />
               <div>
                 <h3 className="flex items-center gap-1 font-bold text-gray-800">Alex</h3>
               </div>
@@ -52,9 +50,10 @@ const QuestionCard = () => {
 
 
           {/* Button */}
-          <Button className="w-full mt-5 rounded-full cursor-pointer bg-gradient-to-r from-purple-400 via-pink-400 to-orange-400 text-white">
+          <Link href="/questions/1" className="w-full flex justify-center py-1 font-semibold mt-5 rounded-full cursor-pointer bg-gradient-to-r from-purple-400 via-pink-400 to-orange-400 text-white">
             View Answer
-          </Button>
+          </Link>
+
         </CardContent>
       </Card>
     </div>

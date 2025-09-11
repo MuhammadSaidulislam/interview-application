@@ -28,9 +28,9 @@ const Navbar = () => {
         {/* User Menu (right side) */}
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="outline">Account</Button>
+            <Button variant="outline" className='cursor-pointer'>Account</Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
+          <DropdownMenuContent align="end" className='z-[1000] bg-white'>
             <DropdownMenuItem>
               <Link href="/admin/login">Profile</Link>
             </DropdownMenuItem>
