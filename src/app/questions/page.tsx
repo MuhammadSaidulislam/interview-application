@@ -86,30 +86,26 @@ const page = () => {
       return matchesSearch && matchesCategory;
     });
   }, [searchTerm, selectedCategory]);
+
+
   return (
     <div>
       <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 p-6">
         <div className="max-w-6xl mx-auto">
-
-
           {/* Search and Filter Section */}
           <div className="bg-white rounded-2xl shadow-lg p-6 mb-8 border border-slate-200">
             {/* Header */}
             <div className="text-center mb-8">
-                <h1 className="text-5xl md:text-7xl font-bold leading-tight bg-gradient-to-r from-purple-400 via-pink-400 to-orange-400 bg-clip-text text-transparent block">
-          Boost Your Skills
-        </h1>
+              <h1 className="text-5xl md:text-7xl font-bold leading-tight bg-gradient-to-r from-purple-400 via-pink-400 to-orange-400 bg-clip-text text-transparent block">
+                Boost Your Skills
+              </h1>
               <p className="text-slate-600 text-xl md:text-2xl">Practice. Learn. Improve your knowledge.</p>
             </div>
             <div className="flex flex-col md:flex-row gap-4">
               {/* Search Input */}
               <div className="relative flex-1">
                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 h-5 w-5" />
-                <input
-                  type="text"
-                  placeholder="Search question..."
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
+                <input  type="text"  placeholder="Search question..."  value={searchTerm}  onChange={(e) => setSearchTerm(e.target.value)}
                   className="w-full pl-10 pr-4 py-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all duration-200 text-slate-700 placeholder-slate-400"
                 />
               </div>
@@ -147,8 +143,8 @@ const page = () => {
 
           {/* Cards Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filteredCards.map(card => (
-              <QuestionCard />
+            {filteredCards.map((card,key) => (
+              <QuestionCard key={key} />
             ))}
           </div>
         </div>
