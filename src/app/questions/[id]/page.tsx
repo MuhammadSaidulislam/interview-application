@@ -81,35 +81,178 @@ const page = () => {
 
   // image set
 
+ const [loading, setLoading] = useState(false);
+
+ const title =
+    "How to properly implement state management in a large-scale React application?";
+  const subtitle = "Start with React's built-in solutions";
+  const paragraph = `I'm working on a complex React application with multiple components that need to share state. 
+I've been using useState and useContext, but as the application grows, I'm finding it harder to manage. 
+What are the best practices for state management in large React applications? Should I consider Redux, Zustand, or stick with React's built-in solutions?`.repeat(
+    3
+  );
+
+  const baseWidth = 900; // final image width
+  const padding = 24;
+
+  // helper: split/word-wrap (respects '\n', splits very long words)
+  function getLinesForText(
+    ctx: CanvasRenderingContext2D,
+    text: string,
+    maxWidth: number
+  ) {
+    const paragraphs = text.split("\n");
+    const lines: string[] = [];
+
+    for (let p = 0; p < paragraphs.length; p++) {
+      const paragraph = paragraphs[p].trim();
+      if (paragraph === "") {
+        lines.push("");
+        continue;
+      }
+
+      const words = paragraph.split(" ");
+      let line = "";
+
+      for (let i = 0; i < words.length; i++) {
+        const word = words[i];
+        const testLine = line ? line + " " + word : word;
+        const metrics = ctx.measureText(testLine);
+        if (metrics.width > maxWidth) {
+          if (line) {
+            lines.push(line);
+            line = word;
+          } else {
+            // break long word
+            let sub = "";
+            for (const ch of word) {
+              const testSub = sub + ch;
+              if (ctx.measureText(testSub).width > maxWidth) {
+                if (sub) lines.push(sub);
+                sub = ch;
+              } else {
+                sub = testSub;
+              }
+            }
+            if (sub) line = sub;
+          }
+        } else {
+          line = testLine;
+        }
+      }
+      if (line) lines.push(line);
+      if (p < paragraphs.length - 1) lines.push("");
+    }
+
+    return lines;
+  }
+
   useEffect(() => {
-    const canvas = document.createElement("canvas");
-    const ctx = canvas.getContext("2d")!;
-    canvas.width = 800;
-    canvas.height = 300;
+    const generateImage = () => {
+      const tempCanvas = document.createElement("canvas");
+      const tempCtx = tempCanvas.getContext("2d")!;
+      tempCtx.textBaseline = "top";
 
-    ctx.fillStyle = "#fff"; // background
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
+      // font definitions
+      const h1Size = 24;
+      const h1Font = `bold ${h1Size}px sans-serif`;
+      const h1Color = "#111827";
+      const h1LineHeight = Math.ceil(h1Size * 1.25);
 
-    ctx.fillStyle = "#111"; // text color
-    ctx.font = "bold 20px sans-serif";
-    ctx.fillText(
-      "How to properly implement state management in a large-scale React application?",
-      20,
-      50,
-      760
-    );
-    ctx.font = "600 16px sans-serif";
-    ctx.fillText("Start with React's built-in solutions", 20, 90);
+      const h4Size = 18;
+      const h4Font = `600 ${h4Size}px sans-serif`;
+      const h4Color = "#111827";
+      const h4LineHeight = Math.ceil(h4Size * 1.3);
 
-    ctx.font = "14px sans-serif";
-    ctx.fillText(
-      "I'm working on a complex React application with multiple components...",
-      20,
-      130,
-      760
-    );
+      const pSize = 14;
+      const pFont = `600 ${pSize}px sans-serif`;
+      const pColor = "#111827";
+      const pLineHeight = Math.ceil(pSize * 1.5);
 
-    setImageSrc(canvas.toDataURL("image/png"));
+      const maxTextWidth = baseWidth - padding * 2;
+
+      // Measure H1
+      tempCtx.font = h1Font;
+      const titleLines = getLinesForText(tempCtx, title, maxTextWidth);
+      const titleHeight = titleLines.length * h1LineHeight;
+
+      // Measure H4
+      tempCtx.font = h4Font;
+      const subtitleLines = getLinesForText(tempCtx, subtitle, maxTextWidth);
+      const subtitleHeight = subtitleLines.length * h4LineHeight;
+
+      // Measure Paragraph
+      tempCtx.font = pFont;
+      const paragraphLines = getLinesForText(tempCtx, paragraph, maxTextWidth);
+      const paragraphHeight = paragraphLines.length * pLineHeight;
+
+      const gapAfterTitle = 12;
+      const gapAfterSubtitle = 10;
+      const totalContentHeight =
+        titleHeight +
+        gapAfterTitle +
+        subtitleHeight +
+        gapAfterSubtitle +
+        paragraphHeight;
+
+      let canvasWidth = baseWidth;
+      let canvasHeight = padding * 2 + totalContentHeight;
+
+      // Handle max dimension
+      const MAX_DIM = 32767;
+      if (canvasHeight > MAX_DIM) {
+        canvasHeight = MAX_DIM - 100;
+      }
+
+      // HiDPI
+      const dpr = window.devicePixelRatio || 1;
+      const canvas = document.createElement("canvas");
+      canvas.width = Math.round(canvasWidth * dpr);
+      canvas.height = Math.round(canvasHeight * dpr);
+      canvas.style.width = `${canvasWidth}px`;
+      canvas.style.height = `${canvasHeight}px`;
+
+      const ctx = canvas.getContext("2d")!;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      ctx.textBaseline = "top";
+
+      // Background
+      ctx.fillStyle = "#ffffff";
+      ctx.fillRect(0, 0, canvasWidth, canvasHeight);
+
+      // Draw H1
+      ctx.fillStyle = h1Color;
+      ctx.font = h1Font;
+      let cursorY = padding;
+      titleLines.forEach((line) => {
+        ctx.fillText(line, padding, cursorY);
+        cursorY += h1LineHeight;
+      });
+
+      cursorY += gapAfterTitle;
+
+      // Draw H4
+      ctx.fillStyle = h4Color;
+      ctx.font = h4Font;
+      subtitleLines.forEach((line) => {
+        ctx.fillText(line, padding, cursorY);
+        cursorY += h4LineHeight;
+      });
+
+      cursorY += gapAfterSubtitle;
+
+      // Draw paragraph
+      ctx.fillStyle = pColor;
+      ctx.font = pFont;
+      paragraphLines.forEach((line) => {
+        ctx.fillText(line, padding, cursorY);
+        cursorY += pLineHeight;
+      });
+
+      setImageSrc(canvas.toDataURL("image/png"));
+    };
+
+    generateImage();
   }, []);
 
   return (
@@ -140,11 +283,15 @@ const page = () => {
             </CardHeader>
             <CardContent className="space-y-6">
               <div>
-                {imageSrc ? (
-                  <img src={imageSrc} alt="text content" />
-                ) : (
-                  <p>Loading...</p>
-                )}
+                 {imageSrc ? (
+        <img
+          src={imageSrc}
+          alt="Generated text"
+          className="border rounded shadow max-w-full"
+        />
+      ) : (
+        <p>Rendering image...</p>
+      )}
               </div>
 
               {/* Question Actions */}
