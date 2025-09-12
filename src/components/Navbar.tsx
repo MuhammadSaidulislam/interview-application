@@ -32,13 +32,16 @@ const Navbar = () => {
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end" className='z-[1000] bg-white'>
             <DropdownMenuItem>
-              <Link href="/admin/login">Profile</Link>
+              <Link href="/dashboard">Dashboard</Link>
             </DropdownMenuItem>
               <DropdownMenuItem>
               <Link href="/questions">Questions</Link>
             </DropdownMenuItem>
             <DropdownMenuItem>
               <Link href="/exam">Exam</Link>
+            </DropdownMenuItem>
+             <DropdownMenuItem>
+              <Link href="/admin/login">Login</Link>
             </DropdownMenuItem>
             <DropdownMenuItem>Logout</DropdownMenuItem>
           </DropdownMenuContent>
