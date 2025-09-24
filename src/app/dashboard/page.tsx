@@ -230,10 +230,10 @@ const page = () => {
                   <p className="text-slate-600 text-lg">All systems operational</p>
                 </div>
                 <div className="flex space-x-3">
-                  <button className="cursor-pointer bg-gradient-to-r from-purple-400 via-pink-400 to-orange-400 text-white rounded-xl px-6 py-3 text-sm font-semibold hover:shadow-lg transform hover:scale-105 transition-all flex items-center">
+                  <Link href="/add-question" className="cursor-pointer bg-gradient-to-r from-purple-400 via-pink-400 to-orange-400 text-white rounded-xl px-6 py-3 text-sm font-semibold hover:shadow-lg transform hover:scale-105 transition-all flex items-center">
                     <Plus className="h-4 w-4 mr-2" />
                     Add Question
-                  </button>
+                  </Link>
                   <Link href="/exam" className="cursor-pointer bg-gradient-to-r from-purple-400 via-pink-400 to-orange-400 text-white rounded-xl px-6 py-3 text-sm font-semibold hover:shadow-lg transform hover:scale-105 transition-all flex items-center">
                     <Plus className="h-4 w-4 mr-2" />
                     Start Exam
