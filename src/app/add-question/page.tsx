@@ -261,23 +261,13 @@ const page = () => {
                   <Target className="w-5 h-5 text-blue-600" />
                   Select Question Type
                 </h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="flex flex-col gap-4">
                   {questionTypes.map((type) => {
                     const Icon = type.icon;
+                    const isSelected = questionType === type.id;
                     return (
-                      <label key={type.id} className="cursor-pointer group">
-                        <input
-                          type="radio"
-                          name="questionType"
-                          value={type.id}
-                          checked={questionType === type.id}
-                          onChange={(e) => setQuestionType(e.target.value)}
-                          className="sr-only"
-                        />
-                        <div className={`p-6 rounded-2xl border-2 transition-all duration-300 ${questionType === type.id
-                          ? 'border-blue-500 bg-blue-50 shadow-lg scale-105'
-                          : 'border-gray-200 bg-white hover:border-blue-300 hover:shadow-md'
-                          }`}>
+                      <label key={type.id} onClick={() => setQuestionType(type.id)} className="cursor-pointer group block" >
+                        <div className={`p-6 rounded-2xl border-2 transition-all duration-300 ${isSelected ? "border-blue-500 bg-blue-50 shadow-lg scale-105" : "border-gray-200 bg-white hover:border-blue-300 hover:shadow-md"}`} >
                           <div className="flex items-start gap-4">
                             <div className={`p-3 rounded-xl bg-gradient-to-r ${type.gradient} shadow-md`}>
                               <Icon className="w-6 h-6 text-white" />
@@ -285,14 +275,6 @@ const page = () => {
                             <div className="flex-1">
                               <h3 className="font-semibold text-lg text-gray-900 mb-1">{type.title}</h3>
                               <p className="text-gray-600 text-sm">{type.description}</p>
-                              <div className={`mt-2 w-4 h-4 rounded-full border-2 ${questionType === type.id
-                                ? 'border-blue-500 bg-blue-500'
-                                : 'border-gray-300'
-                                } transition-colors duration-200`}>
-                                {questionType === type.id && (
-                                  <div className="w-2 h-2 bg-white rounded-full m-0.5"></div>
-                                )}
-                              </div>
                             </div>
                           </div>
                         </div>
